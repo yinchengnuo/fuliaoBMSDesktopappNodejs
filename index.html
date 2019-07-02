@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>富聊后台审核系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+        }
+        #app {
+            height: 100%;
+            width: 100%;
+        }
+        video, div {
+            width: 9vw;
+            height: 16vw;
+            float: left;
+        }
+        .toogle {
+            display: block;
+            margin: 49vw auto 0;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+        <video id="video0" controls antoplay muted></video>
+        <video id="video1" controls antoplay muted></video>
+        <video id="video2" controls antoplay muted></video>
+        <video id="video3" controls antoplay muted></video>
+        <video id="video4" controls antoplay muted></video>
+        <video id="video5" controls antoplay muted></video>
+        <video id="video6" controls antoplay muted></video>
+        <video id="video7" controls antoplay muted></video>
+        <video id="video8" controls antoplay muted></video>
+        <video id="video9" controls antoplay muted></video>
+        <video id="video10" controls antoplay muted></video>
+        <video id="video11" controls antoplay muted></video>
+        <video id="video12" controls antoplay muted></video>
+        <video id="video13" controls antoplay muted></video>
+        <video id="video14" controls antoplay muted></video>
+        <video id="video15" controls antoplay muted></video>
+        <video id="video16" controls antoplay muted></video>
+        <video id="video17" controls antoplay muted></video>
+        <video id="video18" controls antoplay muted></video>
+        <video id="video19" controls antoplay muted></video>
+        <video id="video20" controls antoplay muted></video>
+        <video id="video21" controls antoplay muted></video>
+        <video id="video22" controls antoplay muted></video>
+        <video id="video23" controls antoplay muted></video>
+        <video id="video24" controls antoplay muted></video>
+        <video id="video25" controls antoplay muted></video>
+        <video id="video26" controls antoplay muted></video>
+        <video id="video27" controls antoplay muted></video>
+        <video id="video28" controls antoplay muted></video>
+        <video id="video29" controls antoplay muted></video>
+        <!-- <video id="video30" controls antoplay muted></video>
+        <video id="video31" controls antoplay muted></video>
+        <video id="video32" controls antoplay muted></video> -->
+        <!-- <div id="div0"></div>
+        <div id="div1"></div>
+        <div id="div2"></div>
+        <div id="div3"></div>
+        <div id="div4"></div>
+        <div id="div5"></div>
+        <div id="div6"></div>
+        <div id="div7"></div>
+        <div id="div8"></div>
+        <div id="div9"></div>
+        <div id="div10"></div>
+        <div id="div11"></div>
+        <div id="div12"></div>
+        <div id="div13"></div>
+        <div id="div14"></div>
+        <div id="div15"></div>
+        <div id="div16"></div>
+        <div id="div17"></div>
+        <div id="div18"></div>
+        <div id="div19"></div>
+        <div id="div20"></div>
+        <div id="div21"></div>
+        <div id="div22"></div>
+        <div id="div23"></div>
+        <div id="div24"></div>
+        <div id="div25"></div>
+        <div id="div26"></div>
+        <div id="div27"></div>
+        <div id="div28"></div>
+        <div id="div29"></div>
+        <div id="div30"></div> -->
+        <button class="toogle" @click="toogle">切换批次</button>
+    </div>
+    <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/live/h5/live_connect.js" charset="utf-8"></script>
+    <script src="https://cdn.bootcss.com/flv.js/1.5.0/flv.min.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                list: []
+            },
+            created () {
+                this.get();
+            },
+            methods: {
+                toogle () {
+                    this.list = [];
+                    this.get();
+                },
+                get() {
+                    axios.get('http://www.yinchengnuo.com/tuijian?page=1').then(({ data: { info } }) => {
+                        this.list = [...this.list, ...info];
+                        if (this.list.length > 30) {
+                            this.list.splice(30);
+                            this.rander();
+                        }
+                    });
+                    axios.get('http://www.yinchengnuo.com/tuijian?page=2').then(({ data: { info } }) => {
+                        this.list = [...this.list, ...info];
+                        if (this.list.length > 30) {
+                            this.list.splice(30);
+                            this.rander();
+                        }
+                    });
+                    axios.get('http://www.yinchengnuo.com/tuijian?page=3').then(({ data: { info } }) => {
+                        this.list = [...this.list, ...info];
+                        if (this.list.length > 30) {
+                            this.list.splice(30);
+                            this.rander();
+                        }
+                    });
+                },
+                rander () {
+                    console.log(this.list)
+                    this.list.forEach((e, i) => {
+                        const url = e.streamUrl.replace('rtmp', 'http') + '.flv';
+                        const video = document.getElementById(`video${i}`)
+                        const  flvPlayer = flvjs.createPlayer({
+                            type: 'flv',
+                            url,
+                            cors: true,
+                            isLive: true,
+                        });
+                        flvPlayer.attachMediaElement(video);
+                        flvPlayer.load();
+                        flvPlayer.play();
+                    })
+                }
+            }
+        })
+    </script>
+  </body>
+</html>

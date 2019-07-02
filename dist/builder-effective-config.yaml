@@ -1,0 +1,11 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.fl.app
+mac:
+  target:
+    - dmg
+    - zip
+win:
+  icon: icon.ico
+electronVersion: 5.0.6
