@@ -4,12 +4,32 @@
   "description": "fl bms",
   "main": "index.js",
   "build": {
+    "productName":"富聊后台审核系统",
     "appId": "com.fl.app",
     "mac": {
-      "target": ["dmg","zip"]
+      "target": [
+        "dmg",
+        "zip"
+      ]
     },
     "win": {
-      "icon": "icon.ico"
+      "icon": "icon.ico",
+      "target": [
+        {
+          "target": "nsis"
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false, 
+      "allowElevation": true, 
+      "allowToChangeInstallationDirectory": true, 
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "installerHeaderIcon": "icon.ico", 
+      "createDesktopShortcut": true, 
+      "createStartMenuShortcut": true,
+      "shortcutName": "富聊后台审核系统"
     }
   },
   "scripts": {

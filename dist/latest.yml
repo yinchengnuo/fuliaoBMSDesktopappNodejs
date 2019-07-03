@@ -1,0 +1,8 @@
+version: 1.0.0
+files:
+  - url: fl-setup-1.0.0.exe
+    sha512: ASavwfUfSjOK/DGVtsW8M215pdniDlO/xNjCNkL3UOMcGGlVI1QZbBGLwveteN4DoNFwFpf1vcB4bz8jlSjqYQ==
+    size: 45459090
+path: fl-setup-1.0.0.exe
+sha512: ASavwfUfSjOK/DGVtsW8M215pdniDlO/xNjCNkL3UOMcGGlVI1QZbBGLwveteN4DoNFwFpf1vcB4bz8jlSjqYQ==
+releaseDate: '2019-07-03T04:34:17.883Z'

@@ -5,93 +5,25 @@ app.commandLine.appendSwitch('ignore-connections-limit', 'pili-live-rtmp.hzwangj
 // 垃圾回收的时候，window对象将会自动的关闭
 let win
 
-const template = [
-  // { role: 'appMenu' }
-  ...(process.platform === 'darwin' ? [{
-    label: app.getName(),
-    submenu: [
-      { role: 'about' },
-      { type: 'separator' },
-      { role: 'services' },
-      { type: 'separator' },
-      { role: 'hide' },
-      { role: 'hideothers' },
-      { role: 'unhide' },
-      { type: 'separator' },
-      { role: 'quit' }
-    ]
-  }] : []),
-  // { role: 'fileMenu' }
-  {
-    label: '第一项',
-    submenu: [
-      { role: 'close' }
-    ]
-  },
-  // { role: 'editMenu' }
-  {
-    label: '第二项',
-    submenu: [
-      { role: 'undo' },
-      { role: 'redo' },
-      { type: 'separator' },
-      { role: 'cut' },
-      { role: 'copy' },
-      { role: 'paste' }
-    ]
-  },
-  // { role: 'viewMenu' }
-  {
-    label: '第三项',
-    submenu: [
-      { role: 'reload' },
-      { role: 'forcereload' },
-      { role: 'toggledevtools' },
-      { type: 'separator' },
-      { role: 'resetzoom' },
-      { role: 'zoomin' },
-      { role: 'zoomout' },
-      { type: 'separator' },
-      { role: 'togglefullscreen' }
-    ]
-  },
-  // { role: 'windowMenu' }
-  {
-    label: '第四项',
-    submenu: [
-      { role: 'minimize' },
-      { role: 'zoom' }
-    ]
-  },
-  {
-    role: '第五项',
-    submenu: [
-      {
-        label: 'Learn More',
-        click () { require('electron').shell.openExternalSync('https://electronjs.org') }
-      }
-    ]
-  }
-]
 
-const menu = Menu.buildFromTemplate(template)
-Menu.setApplicationMenu(menu)
+Menu.setApplicationMenu(null)
 
 function createWindow () {
   // 创建浏览器窗口。
   win = new BrowserWindow({
-    width: 1024,
-    height: 888,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      webSecurity: false
     }
   })
+
+  win.maximize() 
 
   // 加载index.html文件
   win.loadFile('index.html')
 
   // 打开开发者工具
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {

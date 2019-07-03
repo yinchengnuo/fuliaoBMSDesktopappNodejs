@@ -8,8 +8,10 @@
             margin: 0;
             padding: 0;
         }
-        html, body {
+        html, body, iframe {
+            width: 100%;
             height: 100%;
+            overflow: hidden;
         }
         #app {
             height: 100%;
@@ -27,8 +29,9 @@
     </style>
   </head>
   <body>
-    <div id="app">
-        <video id="video0" controls antoplay muted></video>
+      <iframe src="http://nb.floa.vip" frameborder="0"></iframe>
+    <!-- <div id="app"> -->
+        <!-- <video id="video0" controls antoplay muted></video>
         <video id="video1" controls antoplay muted></video>
         <video id="video2" controls antoplay muted></video>
         <video id="video3" controls antoplay muted></video>
@@ -57,7 +60,7 @@
         <video id="video26" controls antoplay muted></video>
         <video id="video27" controls antoplay muted></video>
         <video id="video28" controls antoplay muted></video>
-        <video id="video29" controls antoplay muted></video>
+        <video id="video29" controls antoplay muted></video> -->
         <!-- <video id="video30" controls antoplay muted></video>
         <video id="video31" controls antoplay muted></video>
         <video id="video32" controls antoplay muted></video> -->
@@ -92,67 +95,67 @@
         <div id="div28"></div>
         <div id="div29"></div>
         <div id="div30"></div> -->
-        <button class="toogle" @click="toogle">切换批次</button>
-    </div>
+        <!-- <button class="toogle" @click="toogle">切换批次</button>
+    </div> -->
     <script src="http://qzonestyle.gtimg.cn/open/qcloud/video/live/h5/live_connect.js" charset="utf-8"></script>
     <script src="https://cdn.bootcss.com/flv.js/1.5.0/flv.min.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
     <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                list: []
-            },
-            created () {
-                this.get();
-            },
-            methods: {
-                toogle () {
-                    this.list = [];
-                    this.get();
-                },
-                get() {
-                    axios.get('http://www.yinchengnuo.com/tuijian?page=1').then(({ data: { info } }) => {
-                        this.list = [...this.list, ...info];
-                        if (this.list.length > 30) {
-                            this.list.splice(30);
-                            this.rander();
-                        }
-                    });
-                    axios.get('http://www.yinchengnuo.com/tuijian?page=2').then(({ data: { info } }) => {
-                        this.list = [...this.list, ...info];
-                        if (this.list.length > 30) {
-                            this.list.splice(30);
-                            this.rander();
-                        }
-                    });
-                    axios.get('http://www.yinchengnuo.com/tuijian?page=3').then(({ data: { info } }) => {
-                        this.list = [...this.list, ...info];
-                        if (this.list.length > 30) {
-                            this.list.splice(30);
-                            this.rander();
-                        }
-                    });
-                },
-                rander () {
-                    console.log(this.list)
-                    this.list.forEach((e, i) => {
-                        const url = e.streamUrl.replace('rtmp', 'http') + '.flv';
-                        const video = document.getElementById(`video${i}`)
-                        const  flvPlayer = flvjs.createPlayer({
-                            type: 'flv',
-                            url,
-                            cors: true,
-                            isLive: true,
-                        });
-                        flvPlayer.attachMediaElement(video);
-                        flvPlayer.load();
-                        flvPlayer.play();
-                    })
-                }
-            }
-        })
+        // var app = new Vue({
+        //     el: '#app',
+        //     data: {
+        //         list: []
+        //     },
+        //     created () {
+        //         this.get();
+        //     },
+        //     methods: {
+        //         toogle () {
+        //             this.list = [];
+        //             this.get();
+        //         },
+        //         get() {
+        //             axios.get('http://www.yinchengnuo.com/tuijian?page=1').then(({ data: { info } }) => {
+        //                 this.list = [...this.list, ...info];
+        //                 if (this.list.length > 30) {
+        //                     this.list.splice(30);
+        //                     this.rander();
+        //                 }
+        //             });
+        //             axios.get('http://www.yinchengnuo.com/tuijian?page=2').then(({ data: { info } }) => {
+        //                 this.list = [...this.list, ...info];
+        //                 if (this.list.length > 30) {
+        //                     this.list.splice(30);
+        //                     this.rander();
+        //                 }
+        //             });
+        //             axios.get('http://www.yinchengnuo.com/tuijian?page=3').then(({ data: { info } }) => {
+        //                 this.list = [...this.list, ...info];
+        //                 if (this.list.length > 30) {
+        //                     this.list.splice(30);
+        //                     this.rander();
+        //                 }
+        //             });
+        //         },
+        //         rander () {
+        //             console.log(this.list)
+        //             this.list.forEach((e, i) => {
+        //                 const url = e.streamUrl.replace('rtmp', 'http') + '.flv';
+        //                 const video = document.getElementById(`video${i}`)
+        //                 const  flvPlayer = flvjs.createPlayer({
+        //                     type: 'flv',
+        //                     url,
+        //                     cors: true,
+        //                     isLive: true,
+        //                 });
+        //                 flvPlayer.attachMediaElement(video);
+        //                 flvPlayer.load();
+        //                 flvPlayer.play();
+        //             })
+        //         }
+        //     }
+        // })
     </script>
   </body>
 </html>
